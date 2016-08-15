@@ -11,7 +11,7 @@ The program draws inspiration and uses some code from the following examples and
 
 In short, the program works like this:
 
-[[https://github.com/AndreasReiten/qtvknbody/blob/master/doc/path4572.png|alt=octocat]]
+![alt tag](https://github.com/AndreasReiten/qtvknbody/blob/master/doc/path4572.png)
 
 ## Hardware requirements 
 A graphics card that supports Vulkan. See for example https://en.wikipedia.org/wiki/Vulkan_(API)#Compatibility
