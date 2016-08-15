@@ -1,5 +1,9 @@
 #version 450
 
+/*
+ * Shader draws a HDR texture into a normal LDR buffer using tone mapping (from high to low dynamic range)
+ * */
+
 layout (location = 0) in vec2 inPos;
 layout (location = 1) in vec2 inUV;
 

@@ -1,5 +1,9 @@
 #version 450
 
+/*
+ * Shader that draws a performance meter showing the relative time spent on various processes.
+ * */
+
 layout (location = 0) in vec2 inPos;
 layout (location = 1) in vec2 inUv;
 

@@ -1,5 +1,9 @@
 #version 450
 
+/*
+ * Shader that uses instanced drawing to render N instances of a particle.
+ * */
+
 layout (std140, binding = 0) uniform UBO
 {
     mat4 projectionMatrix;

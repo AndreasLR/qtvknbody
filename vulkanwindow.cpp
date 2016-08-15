@@ -2653,7 +2653,7 @@ void VulkanWindow::commandBuffersComputeRecord()
                 command_buffer_compute_step_2,
                 VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
                 VK_PIPELINE_STAGE_TRANSFER_BIT,
-                VK_FLAGS_NONE,
+                0,
                 0, nullptr,
                 1, &barrier,
                 0, nullptr);
@@ -2675,7 +2675,7 @@ void VulkanWindow::commandBuffersComputeRecord()
                 command_buffer_compute_step_2,
                 VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
                 VK_PIPELINE_STAGE_TRANSFER_BIT,
-                VK_FLAGS_NONE,
+                0,
                 0, nullptr,
                 1, &barrier,
                 0, nullptr);
@@ -2710,7 +2710,7 @@ void VulkanWindow::commandBuffersComputeRecord()
                 command_buffer_compute_step_2,
                 VK_PIPELINE_STAGE_TRANSFER_BIT,
                 VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-                VK_FLAGS_NONE,
+                0,
                 0, nullptr,
                 1, &barrier,
                 0, nullptr);
@@ -2733,7 +2733,7 @@ void VulkanWindow::commandBuffersComputeRecord()
                 command_buffer_compute_step_2,
                 VK_PIPELINE_STAGE_TRANSFER_BIT,
                 VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
-                VK_FLAGS_NONE,
+                0,
                 0, nullptr,
                 1, &barrier,
                 0, nullptr);

@@ -1,3 +1,7 @@
+/*
+ * Platform detection and corresponding library loading
+ * */
+
 #ifndef PLATFORM_H
 #define PLATFORM_H
 

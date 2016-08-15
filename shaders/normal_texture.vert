@@ -1,5 +1,9 @@
 #version 450
 
+/*
+ * Shader that simply draws a 2d texture
+ * */
+
 layout (location = 0) in vec2 inPos;
 layout (location = 1) in vec2 inUV;
 

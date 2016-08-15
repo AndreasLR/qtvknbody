@@ -1,5 +1,9 @@
 #version 450
 
+/*
+ * Compute shader that computes new positions for N-body particles given velocity and time step information.
+ * */
+
 struct Particle
 {
     vec4 xyzm;

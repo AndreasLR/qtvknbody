@@ -1,3 +1,7 @@
+/*
+ * Some build options to enable/disable disable debugging
+ * */
+
 #ifndef BUILD_OPTIONS_H
 #define BUILD_OPTIONS_H
 

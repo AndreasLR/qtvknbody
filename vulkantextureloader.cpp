@@ -288,7 +288,7 @@ void VulkanTextureLoader::loadTexture(std::string filename, VkFormat format, Vul
         VkFence           copyFence;
         VkFenceCreateInfo fenceCreateInfo = {};
         fenceCreateInfo.sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
-        fenceCreateInfo.flags = VK_FLAGS_NONE;
+        fenceCreateInfo.flags = 0;
         HANDLE_VK_RESULT(vkCreateFence(device, &fenceCreateInfo, nullptr, &copyFence));
 
         VkSubmitInfo submitInfo = {};
@@ -299,7 +299,7 @@ void VulkanTextureLoader::loadTexture(std::string filename, VkFormat format, Vul
 
         HANDLE_VK_RESULT(vkQueueSubmit(queue, 1, &submitInfo, copyFence));
 
-        HANDLE_VK_RESULT(vkWaitForFences(device, 1, &copyFence, VK_TRUE, VK_DEFAULT_FENCE_TIMEOUT));
+        HANDLE_VK_RESULT(vkWaitForFences(device, 1, &copyFence, VK_TRUE, 100000000000));
 
         vkDestroyFence(device, copyFence, nullptr);
 

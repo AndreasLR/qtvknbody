@@ -1,3 +1,7 @@
+/*
+ * Some defines, functions, structs, and a helper class that are used commonly throughout the project
+ * */
+
 #ifndef COMMON_H
 #define COMMON_H
 
@@ -9,12 +13,15 @@
 #include "BUILD_OPTIONS.h"
 #include "platform.hpp"
 
-
+// Readability defines
 #define VERTEX_BUFFER_BIND_ID    0
 #define INSTANCE_BUFFER_BIND_ID  1
 
+// Debug functions
 #define HANDLE_VK_RESULT(result) \
     VulkanHandleResult((result), # result, __LINE__, __FILE__);
+
+void VulkanHandleResult(VkResult result, const char *argument, size_t line, const char *file);
 
 #define VERIFY_FUNCTION_POINTER(function_ptr)                                                                                                 \
     if (function_ptr == nullptr)                                                                                                              \
@@ -22,17 +29,6 @@
         QString msg = "Line " + QString::number(__LINE__) + " (" + __FILE__ + ") Invalid function pointer (" + QString(# function_ptr) + ")"; \
         qFatal(msg.toStdString().c_str());                                                                                                    \
     }
-
-#define VK_VER_MAJOR(X)    ((((uint32_t)(X)) >> 22) & 0x3FF)
-#define VK_VER_MINOR(X)    ((((uint32_t)(X)) >> 12) & 0x3FF)
-#define VK_VER_PATCH(X)    (((uint32_t)(X)) & 0xFFF)
-
-// Custom define for better code readability
-#define VK_FLAGS_NONE               0
-// Default fence timeout in nanoseconds
-#define VK_DEFAULT_FENCE_TIMEOUT    100000000000
-
-void VulkanHandleResult(VkResult result, const char *argument, size_t line, const char *file);
 
 VKAPI_ATTR VkBool32 VKAPI_CALL VulkanDebugReportCallback(
     VkDebugReportFlagsEXT      flags,
@@ -44,6 +40,7 @@ VKAPI_ATTR VkBool32 VKAPI_CALL VulkanDebugReportCallback(
     const char                 *pMessage,
     void                       *pUserData);
 
+// Helper class
 class VulkanHelper
 {
 public:
@@ -96,6 +93,8 @@ private:
     VkPhysicalDeviceMemoryProperties physicalDeviceMemoryProperties;
 };
 
+
+// Convenience structs
 struct StandaloneImage
 {
     VkImage        image;

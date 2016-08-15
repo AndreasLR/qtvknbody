@@ -1,3 +1,7 @@
+/*
+ * The Qt mainwindow. Parent GUI object
+ * */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 

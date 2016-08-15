@@ -1,3 +1,7 @@
+/*
+ * A class that initializes core Vulkan objects and exposes them to the rest of the program. I.e. devices and queues
+ * */
+
 #ifndef VULKANBASE_H
 #define VULKANBASE_H
 
