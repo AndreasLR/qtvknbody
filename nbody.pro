@@ -18,6 +18,8 @@ INCLUDEPATH += "external/"
 unix:LIBS += -lvulkan
 win32:LIBS += "$$PWD/lib/x64/vulkan-1.lib"
 
+win32: RC_ICONS = doc/app.ico
+
 OBJECTS_DIR = buildfiles/obj
 MOC_DIR = buildfiles/moc
 RCC_DIR = buildfiles/rcc
@@ -60,3 +62,6 @@ DISTFILES += \
     shaders/luminosity.vert \
     shaders/performance_meter.frag \
     shaders/performance_meter.vert
+
+RESOURCES += \
+    resources.qrc
