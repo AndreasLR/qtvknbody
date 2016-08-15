@@ -1,0 +1,78 @@
+#version 450
+
+struct Particle
+{
+    vec4 xyzm;
+    vec4 v;
+};
+
+layout(std430, binding = 0) buffer Particles
+{
+    Particle particles[ ];
+};
+
+layout (std140, binding = 1) uniform UBO
+{
+    float G;
+    float t_delta;
+    float eps2;
+    float power;
+    uint particle_count;
+    uvec3 work_group_offset;
+} ubo;
+
+layout (local_size_x = 128) in;
+
+shared vec4 shared_data[128];
+
+vec3 bodyBodyInteraction(vec3 r, float m_j)
+{       
+    return r * m_j / pow(dot(r,r) + ubo.eps2, ubo.power);
+}  
+
+void main() 
+{
+    // Compute the velocity at time step i + 1/2 using the particle positions at time step i;
+    // Shared (on-chip) memory is employed to reduce redundant calls to global memory
+	
+    uint index = gl_GlobalInvocationID.x + ubo.work_group_offset.x * gl_WorkGroupSize.x;
+    vec4 xyzm_i;
+
+    if (index < ubo.particle_count)
+    {
+        xyzm_i = particles[index].xyzm;
+    }
+    else
+    {
+        xyzm_i = vec4(0.0,0.0,0.0,0.0);
+    }
+
+    vec4 acceleration = vec4(0.0,0.0,0.0,0.0);
+
+    for (uint j = 0; j < ubo.particle_count; j += 128)//gl_WorkGroupSize.x)
+    {
+        // Load xyzm data into local buffer
+        if (j+gl_LocalInvocationID.x < ubo.particle_count)
+        {
+            shared_data[gl_LocalInvocationID.x] = particles[j+gl_LocalInvocationID.x].xyzm;
+        }
+        else
+        {
+            shared_data[gl_LocalInvocationID.x] = vec4(0.0,0.0,0.0,0.0);
+        }
+
+        memoryBarrierShared();
+        barrier();
+
+        for (uint k = 0; k < gl_WorkGroupSize.x; k ++)
+        {
+            vec4 xyzm_j = shared_data[k];
+            acceleration.xyz += ubo.G *bodyBodyInteraction(xyzm_j.xyz - xyzm_i.xyz, xyzm_j.w);
+        }
+    }
+
+    if (index < ubo.particle_count)
+    {
+        particles[index].v += acceleration*ubo.t_delta;
+    }
+}

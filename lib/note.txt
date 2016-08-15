@@ -1,0 +1,14 @@
+How to create a lib file for Windows using Visual Studio. (from http://stackoverflow.com/questions/9946322/how-to-generate-an-import-library-lib-file-from-a-dll):
+Example: vulkan library:
+
+In visual studio command prompt:
+
+dumpbin /exports C:/Windows/System32/vulkan-1.dll
+dumpbin /exports C:/Windows/SysWOW64/vulkan-1.dll
+
+copy function names to a text file with suffix .def
+Start text file content with "EXPORTS"
+
+lib /def:C:/Users/Natt/Code/vulkan/test/lib/x64/vulkan-1.def /out:C:/Users/Natt/Code/vulkan/test/lib/x64/vulkan-1.lib /machine:x64
+
+lib /def:C:/Users/Natt/Code/vulkan/test/lib/x86/vulkan-1.def /out:C:/Users/Natt/Code/vulkan/test/lib/x86/vulkan-1.lib /machine:x86

@@ -1,0 +1,36 @@
+#version 450
+
+struct Particle
+{
+    vec4 xyzm;
+    vec4 v;
+};
+
+layout(std430, binding = 0) buffer Particles
+{
+    Particle particles[ ];
+};
+
+layout (std140, binding = 1) uniform UBO
+{
+    float G;
+    float t_delta;
+    float eps2;
+    float power;
+    uint particle_count;
+    uvec3 work_group_offset;
+} ubo;
+
+layout (local_size_x = 128) in;
+
+void main() 
+{
+    uint index = gl_GlobalInvocationID.x;
+    if (index >= ubo.particle_count)
+    {
+        return;
+    }	
+
+    // Compute the position at time step i + 1 using the particle velocities at time step i+1/2;
+    particles[index].xyzm.xyz += particles[index].v.xyz * ubo.t_delta;
+}
