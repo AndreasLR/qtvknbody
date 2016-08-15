@@ -27,6 +27,7 @@ VulkanTextureLoader::~VulkanTextureLoader()
     delete vulkan_helper;
 }
 
+
 void VulkanTextureLoader::setImageLayout(
     VkCommandBuffer    cmdbuffer,
     VkImage            image,
@@ -132,6 +133,7 @@ void VulkanTextureLoader::setImageLayout(
         0, nullptr,
         1, &imageMemoryBarrier);
 }
+
 
 // Load a 2D texture
 void VulkanTextureLoader::loadTexture(std::string filename, VkFormat format, VulkanTexture *texture, VkImageUsageFlags imageUsageFlags, VkSamplerAddressMode sampler_address_mode)

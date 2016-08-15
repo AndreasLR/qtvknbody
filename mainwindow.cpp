@@ -38,7 +38,7 @@ void MainWindow::help()
                               "<li>Mouse sensitivity can be adjusted in the controls</li>"
                               "</ul>"
                               "<p><strong>Performance</strong></p>"
-                                                            "<ul>"
+                              "<ul>"
                               "<li>The two bars show relative time spent on graphics (top) and compute. The different colour represent different operations, like blurring and drawing </li>"
                               "<li>Higher fps or cps (computations per second) can be achieved for example by reducing the number of pareticles or setting the blur extent to zero</li>"
                               "</ul>");

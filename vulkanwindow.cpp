@@ -124,8 +124,11 @@ void VulkanWindow::initialize()
     ubo_nbody_graphics.fbo_size[1] = static_cast<float>(surface_capabilities.currentExtent.height);
 
     // Init bloom framebuffer size
-    framebuffer_size_blur_pass = {static_cast<uint32_t>(surface_capabilities.currentExtent.width*framebuffer_size_blur_pass_multiplier),
-                                  static_cast<uint32_t>(surface_capabilities.currentExtent.height*framebuffer_size_blur_pass_multiplier)};
+    framebuffer_size_blur_pass =
+    {
+        static_cast<uint32_t>(surface_capabilities.currentExtent.width * framebuffer_size_blur_pass_multiplier),
+        static_cast<uint32_t>(surface_capabilities.currentExtent.height * framebuffer_size_blur_pass_multiplier)
+    };
 
     // More Vulkan things
     commandPoolCreate();
@@ -368,9 +371,9 @@ void VulkanWindow::createFpsString()
 
     emit fpsStringChanged("Qt+Vulkan N-body simulation - [fps: " +
                           QString::number(static_cast<double> (p_fps_stack.size()) / (time_elapsed_graphics * 1.0e-9), 'f', 0) + " @ " +
-                          QString("%1").arg(time_total_graphics/1.0e6, -4, 'g', 3, QLatin1Char( '0' ))+" ms] - [cps: " +
+                          QString("%1").arg(time_total_graphics / 1.0e6, -4, 'g', 3, QLatin1Char('0')) + " ms] - [cps: " +
                           QString::number(static_cast<double> (p_cps_stack.size()) / (time_elapsed_compute * 1.0e-9), 'f', 0) + " @ " +
-                          QString("%1").arg(time_total_compute/1.0e6, -4, 'g', 3, QLatin1Char( '0' ))+" ms]");
+                          QString("%1").arg(time_total_compute / 1.0e6, -4, 'g', 3, QLatin1Char('0')) + " ms]");
 }
 
 
@@ -517,15 +520,16 @@ void VulkanWindow::queueComputeSubmit()
     }
 }
 
+
 void VulkanWindow::focusOutEvent(QFocusEvent *ev)
 {
-    p_key_w_active = false;
-    p_key_a_active = false;
-    p_key_s_active = false;
-    p_key_d_active = false;
-    p_key_q_active = false;
-    p_key_e_active = false;
-    p_key_ctrl_active = false;
+    p_key_w_active     = false;
+    p_key_a_active     = false;
+    p_key_s_active     = false;
+    p_key_d_active     = false;
+    p_key_q_active     = false;
+    p_key_e_active     = false;
+    p_key_ctrl_active  = false;
     p_key_shift_active = false;
     p_key_space_active = false;
 }
@@ -662,14 +666,14 @@ void VulkanWindow::queueGraphicsSubmit()
         HANDLE_VK_RESULT(vkGetQueryPoolResults(vkbase.device(), query_pool_graphics, 10, 2, sizeof(QueryResult) * 2, query_timestamp_graphics_tone_map.data(), sizeof(QueryResult), VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WITH_AVAILABILITY_BIT));
         HANDLE_VK_RESULT(vkGetQueryPoolResults(vkbase.device(), query_pool_graphics, 12, 2, sizeof(QueryResult) * 2, query_timestamp_graphics.data(), sizeof(QueryResult), VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WITH_AVAILABILITY_BIT));
 
-        float time_scene          = static_cast<double>(query_timestamp_graphics_scene[1].time - query_timestamp_graphics_scene[0].time);
-        float time_brightness     = static_cast<double>(query_timestamp_graphics_brightness[1].time - query_timestamp_graphics_brightness[0].time);
-        float time_blur_alpha     = static_cast<double>(query_timestamp_graphics_blur_alpha[1].time - query_timestamp_graphics_blur_alpha[0].time);
-        float time_blur_beta      = static_cast<double>(query_timestamp_graphics_blur_beta[1].time - query_timestamp_graphics_blur_beta[0].time);
-        float time_combine        = static_cast<double>(query_timestamp_graphics_combine[1].time - query_timestamp_graphics_combine[0].time);
-        float time_tone_map       = static_cast<double>(query_timestamp_graphics_tone_map[1].time - query_timestamp_graphics_tone_map[0].time);
+        float time_scene      = static_cast<double>(query_timestamp_graphics_scene[1].time - query_timestamp_graphics_scene[0].time);
+        float time_brightness = static_cast<double>(query_timestamp_graphics_brightness[1].time - query_timestamp_graphics_brightness[0].time);
+        float time_blur_alpha = static_cast<double>(query_timestamp_graphics_blur_alpha[1].time - query_timestamp_graphics_blur_alpha[0].time);
+        float time_blur_beta  = static_cast<double>(query_timestamp_graphics_blur_beta[1].time - query_timestamp_graphics_blur_beta[0].time);
+        float time_combine    = static_cast<double>(query_timestamp_graphics_combine[1].time - query_timestamp_graphics_combine[0].time);
+        float time_tone_map   = static_cast<double>(query_timestamp_graphics_tone_map[1].time - query_timestamp_graphics_tone_map[0].time);
         time_total_graphics = static_cast<double>(query_timestamp_graphics[1].time - query_timestamp_graphics[0].time);
-        float time_overhead       = time_total_graphics - time_scene - time_brightness - time_blur_alpha - time_blur_beta - time_combine - time_tone_map;
+        float time_overhead = time_total_graphics - time_scene - time_brightness - time_blur_alpha - time_blur_beta - time_combine - time_tone_map;
 
         ubo_performance_meter_graphics.process_count = 7;
         ubo_performance_meter_graphics.positions[0]  = time_scene / time_total_graphics;
@@ -748,20 +752,20 @@ void VulkanWindow::mouseMoveEvent(QMouseEvent *ev)
             else
             {
                 // Smooth rotation
-                QPoint middle_of_widget(this->width()/2, this->height()/2);
+                QPoint middle_of_widget(this->width() / 2, this->height() / 2);
                 QPoint middle_of_widget_global = mapToGlobal(middle_of_widget);
 
                 p_pitch_yaw_vector.setX(p_last_position.x() - middle_of_widget.x());
                 p_pitch_yaw_vector.setY(p_last_position.y() - middle_of_widget.y());
 
-                double pitch_yaw_magnitude = std::sqrt(p_pitch_yaw_vector.x()*p_pitch_yaw_vector.x() + p_pitch_yaw_vector.y()*p_pitch_yaw_vector.y());
-                double pitch_yaw_magnitude_max = 0.5*this->height();
+                double pitch_yaw_magnitude     = std::sqrt(p_pitch_yaw_vector.x() * p_pitch_yaw_vector.x() + p_pitch_yaw_vector.y() * p_pitch_yaw_vector.y());
+                double pitch_yaw_magnitude_max = 0.5 * this->height();
 
                 // Move cursor closer to origin defined by mouse press
                 if (pitch_yaw_magnitude > pitch_yaw_magnitude_max)
                 {
-                    p_pitch_yaw_vector.setX(p_pitch_yaw_vector.x()/pitch_yaw_magnitude*pitch_yaw_magnitude_max*0.9);
-                    p_pitch_yaw_vector.setY(p_pitch_yaw_vector.y()/pitch_yaw_magnitude*pitch_yaw_magnitude_max*0.9);
+                    p_pitch_yaw_vector.setX(p_pitch_yaw_vector.x() / pitch_yaw_magnitude * pitch_yaw_magnitude_max * 0.9);
+                    p_pitch_yaw_vector.setY(p_pitch_yaw_vector.y() / pitch_yaw_magnitude * pitch_yaw_magnitude_max * 0.9);
 
                     this->cursor().setPos(QPoint(p_pitch_yaw_vector.x() + middle_of_widget_global.x(), p_pitch_yaw_vector.y() + middle_of_widget_global.y()));
                 }
@@ -3620,11 +3624,11 @@ void VulkanWindow::passiveMove()
     // Mouse movement
     if (p_mouse_right_button_active && p_key_ctrl_active)
     {
-        double eta = std::atan2(p_pitch_yaw_vector.y(), p_pitch_yaw_vector.x()) - 0.5*pi;
-        double relative_magnitude = std::min(((double) this->height()*0.5), (double) std::sqrt(p_pitch_yaw_vector.x() * p_pitch_yaw_vector.x() + p_pitch_yaw_vector.y() * p_pitch_yaw_vector.y()))/ ((double) this->height()*0.5);
-        double magnitude = time_since_last_movement * std::pow(relative_magnitude, 2.0);
+        double eta = std::atan2(p_pitch_yaw_vector.y(), p_pitch_yaw_vector.x()) - 0.5 * pi;
+        double relative_magnitude = std::min(((double)this->height() * 0.5), (double)std::sqrt(p_pitch_yaw_vector.x() * p_pitch_yaw_vector.x() + p_pitch_yaw_vector.y() * p_pitch_yaw_vector.y())) / ((double)this->height() * 0.5);
+        double magnitude          = time_since_last_movement * std::pow(relative_magnitude, 2.0);
 
-        pitch_yaw_rotation.setArbRotation(-0.5*pi, eta, magnitude);
+        pitch_yaw_rotation.setArbRotation(-0.5 * pi, eta, magnitude);
     }
 
     rotation_matrix = pitch_yaw_rotation * rotation_matrix * roll_rotation;
@@ -5022,8 +5026,11 @@ void VulkanWindow::swapChainRecreate()
     ubo_nbody_graphics.fbo_size[0] = static_cast<float>(surface_capabilities.currentExtent.width);
     ubo_nbody_graphics.fbo_size[1] = static_cast<float>(surface_capabilities.currentExtent.height);
 
-    framebuffer_size_blur_pass = {static_cast<uint32_t>(surface_capabilities.currentExtent.width*framebuffer_size_blur_pass_multiplier),
-                                  static_cast<uint32_t>(surface_capabilities.currentExtent.height*framebuffer_size_blur_pass_multiplier)};
+    framebuffer_size_blur_pass =
+    {
+        static_cast<uint32_t>(surface_capabilities.currentExtent.width * framebuffer_size_blur_pass_multiplier),
+        static_cast<uint32_t>(surface_capabilities.currentExtent.height * framebuffer_size_blur_pass_multiplier)
+    };
 
     // Recreate depth stencil
     depthStencilDestroy();

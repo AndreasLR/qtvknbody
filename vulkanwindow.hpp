@@ -105,16 +105,16 @@ private:
 
     uint32_t work_item_count_nbody[3] = { 128, 1, 1 }; // Must match that in shader
 
-    UniformData      buffer_nbody_compute;
-    UniformData      buffer_nbody_draw;
-    UniformData      uniform_nbody_graphics;
-    UniformData      uniform_nbody_compute;
-    UniformData      uniform_performance_graphics;
-    UniformData      uniform_performance_compute;
+    UniformData buffer_nbody_compute;
+    UniformData buffer_nbody_draw;
+    UniformData uniform_nbody_graphics;
+    UniformData uniform_nbody_compute;
+    UniformData uniform_performance_graphics;
+    UniformData uniform_performance_compute;
 
     // Textures
-    VulkanTexture    texture_particle;
-    VulkanTexture    texture_noise;
+    VulkanTexture texture_particle;
+    VulkanTexture texture_noise;
 
     // Vertex collections
     VertexCollection vertices_nbody;
@@ -125,12 +125,12 @@ private:
     IndexCollection  indices_quad;
 
     // Samplers
-    VkSampler        sampler_standard = VK_NULL_HANDLE;
+    VkSampler sampler_standard = VK_NULL_HANDLE;
 
 
     // Bloom
     QVector<uint32_t> framebuffer_size_blur_pass;
-    double framebuffer_size_blur_pass_multiplier = 0.5;
+    double            framebuffer_size_blur_pass_multiplier = 0.5;
 
     struct
     {
@@ -145,7 +145,7 @@ private:
     }
     push_constants;
 
-    UniformData      uniform_blur;
+    UniformData uniform_blur;
 
     // Tone mapping
     struct
@@ -169,7 +169,7 @@ private:
         float relative_size = 1.0;
     }
     ubo_performance_meter_graphics,
-    ubo_performance_meter_compute;
+        ubo_performance_meter_compute;
 
     // Queries
     void queryPoolCreate();
@@ -255,9 +255,9 @@ private:
     void hdrFramebufferDestroy(Framebuffer *framebuffer);
 
     // Render pass
-    VkRenderPass render_pass_ldr = VK_NULL_HANDLE;
+    VkRenderPass render_pass_ldr             = VK_NULL_HANDLE;
     VkRenderPass render_pass_hdr_color_depth = VK_NULL_HANDLE;
-    VkRenderPass render_pass_hdr = VK_NULL_HANDLE;
+    VkRenderPass render_pass_hdr             = VK_NULL_HANDLE;
     void renderPassesCreate();
     void renderPassDestroy();
 
@@ -277,9 +277,9 @@ private:
     void descriptorPoolDestroy();
 
     // Descriptor set layouts
-    VkDescriptorSetLayout descriptor_layout_nbody       = VK_NULL_HANDLE;
+    VkDescriptorSetLayout descriptor_layout_nbody          = VK_NULL_HANDLE;
     VkDescriptorSetLayout descriptor_layout_performance    = VK_NULL_HANDLE;
-    VkDescriptorSetLayout descriptor_layout_leapfrog          = VK_NULL_HANDLE;
+    VkDescriptorSetLayout descriptor_layout_leapfrog       = VK_NULL_HANDLE;
     VkDescriptorSetLayout descriptor_layout_blur           = VK_NULL_HANDLE;
     VkDescriptorSetLayout descriptor_layout_normal_texture = VK_NULL_HANDLE;
     VkDescriptorSetLayout descriptor_layout_tone_mapping   = VK_NULL_HANDLE;
@@ -391,8 +391,8 @@ private:
     QElapsedTimer  cps_timer;
     QTimer         fps_update_timer;
     QElapsedTimer  uptime;
-    double time_total_graphics;
-    double time_total_compute;
+    double         time_total_graphics;
+    double         time_total_compute;
 
     // Refresh timer
     QTimer *graphics_timer;

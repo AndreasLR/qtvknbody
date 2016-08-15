@@ -14,8 +14,8 @@
 #include "platform.hpp"
 
 // Readability defines
-#define VERTEX_BUFFER_BIND_ID    0
-#define INSTANCE_BUFFER_BIND_ID  1
+#define VERTEX_BUFFER_BIND_ID      0
+#define INSTANCE_BUFFER_BIND_ID    1
 
 // Debug functions
 #define HANDLE_VK_RESULT(result) \

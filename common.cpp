@@ -151,9 +151,6 @@ void VulkanHelper::destroyVulkanShaderModule(VkShaderModule& shader_module)
 }
 
 
-
-
-
 void VulkanHelper::createBuffer(VkBufferUsageFlags usageFlags, VkMemoryPropertyFlags memoryPropertyFlags, VkDeviceSize size, void *data, VkBuffer *buffer, VkDeviceMemory *memory)
 {
     VkBufferCreateInfo bufferCreateInfo = {};
