@@ -51,19 +51,6 @@ public:
                  VkDevice                         device,
                  VkPhysicalDeviceMemoryProperties physicalDeviceMemoryProperties);
 
-    void setImageLayout(
-        VkCommandBuffer    cmdbuffer,
-        VkImage            image,
-        VkImageAspectFlags aspectMask,
-        VkImageLayout      oldImageLayout,
-        VkImageLayout      newImageLayout);
-
-    void setImageLayout(VkCommandBuffer         cmdbuffer,
-                        VkImage                 image,
-                        VkImageLayout           oldImageLayout,
-                        VkImageLayout           newImageLayout,
-                        VkImageSubresourceRange subresourceRange);
-
     void createBuffer(VkBufferUsageFlags    usageFlags,
                       VkMemoryPropertyFlags memoryPropertyFlags,
                       VkDeviceSize          size,

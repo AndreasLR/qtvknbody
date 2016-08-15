@@ -35,11 +35,19 @@ public:
     // Load a 2D texture
     void loadTexture(std::string filename, VkFormat format, VulkanTexture *texture, VkImageUsageFlags imageUsageFlags, VkSamplerAddressMode sampler_address_mode = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE);
 
-    // Load a cubemap texture (single file)
-    void loadCubemap(std::string filename, VkFormat format, VulkanTexture *texture);
+    // Change layout of image
+    void setImageLayout(
+        VkCommandBuffer    cmdbuffer,
+        VkImage            image,
+        VkImageAspectFlags aspectMask,
+        VkImageLayout      oldImageLayout,
+        VkImageLayout      newImageLayout);
 
-    // Load an array texture (single file)
-    void loadTextureArray(std::string filename, VkFormat format, VulkanTexture *texture);
+    void setImageLayout(VkCommandBuffer         cmdbuffer,
+                        VkImage                 image,
+                        VkImageLayout           oldImageLayout,
+                        VkImageLayout           newImageLayout,
+                        VkImageSubresourceRange subresourceRange);
 
     // Clean up vulkan resources used by a texture object
     void destroyTexture(VulkanTexture texture);
