@@ -1,5 +1,5 @@
 #Qt + Vulkan Nbody Demo
-![alt tag](https://github.com/AndreasReiten/qtvknbody/blob/master/doc/screenshot_nbody_2016_08_15_15_24_22.png)
+![image](https://github.com/AndreasReiten/qtvknbody/blob/master/doc/screenshot_nbody_2016_08_15_15_24_22.png)
 
 This is a Qt program that uses the Vulkan API to render a classical N-body simulation. Both graphics and compute shaders are employed. Graphical enhancements include bloom and high dynamic range rendering (hdr).
 
@@ -10,7 +10,7 @@ The program draws inspiration and uses some code from the following examples and
 ## Program overview
 In short, the program works like this:
 
-![alt tag](https://github.com/AndreasReiten/qtvknbody/blob/master/doc/path4572.png)
+![image](https://github.com/AndreasReiten/qtvknbody/blob/master/doc/path4572.png)
 
 ## Hardware requirements 
 A graphics card that supports Vulkan. See for example https://en.wikipedia.org/wiki/Vulkan_(API)#Compatibility
@@ -25,3 +25,5 @@ The easiest thing to do next is to open the .pro file using the QtCreator IDE an
 A pre-compiled 64-bit binary for Windows can be found in the "Releases" tab. 
 
 ![alt tag](https://github.com/AndreasReiten/qtvknbody/blob/master/doc/screenshot_nbody_2016_08_15_15_27_52.png)
+
+[![youtube video](https://img.youtube.com/vi/BsCqkKZtRfU/0.jpg)](https://www.youtube.com/watch?v=BsCqkKZtRfU)
