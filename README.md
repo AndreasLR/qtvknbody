@@ -3,6 +3,7 @@
 
 ###_[Youtube video](https://youtu.be/BsCqkKZtRfU)_
 
+Update: This example has not been updated since the initial commits. Since then there has been some advances in Vulkan, and the QtVulkan-based classes have been introduced. There are also many things I'd do differently regarding clean code and readability. So use at your own risk!
 
 This is a Qt program that uses the Vulkan API to render a classical N-body simulation. Both graphics and compute shaders are employed. Graphical enhancements include bloom and high dynamic range rendering (hdr).
 
